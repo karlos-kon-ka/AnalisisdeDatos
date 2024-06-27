@@ -1,18 +1,21 @@
-# Archivo: exploracion_inicial.py
 import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
 
-# Leer el dataset desde data/raw/encuesta_madrid.xlsx
-df = pd.read_excel('data/raw/encuesta_madrid.xlsx')
+# Cargar el dataset
+df = pd.read_excel('../data/raw/dataset.xlsx')
 
-# Mostrar las primeras y últimas filas del dataset
-print("Primeras filas del dataset:")
+# Mostrar primeras filas
 print(df.head())
-print("\nÚltimas filas del dataset:")
-print(df.tail())
 
-# Obtener información general del dataset
-print("\nInformación general del dataset:")
-print(df.info())
+# Resumen estadístico
+print(df.describe())
 
-# Guardar el resultado de exploración en un archivo de texto opcionalmente
-# df.head().to_csv('reports/exploracion_inicial_resultado.csv', index=False)
+# Histograma para cada columna numérica
+df.hist(bins=50, figsize=(20, 15))
+plt.show()
+
+# Gráfico de calor para ver las correlaciones
+plt.figure(figsize=(10, 8))
+sns.heatmap(df.corr(), annot=True, cmap='coolwarm')
+plt.show()
